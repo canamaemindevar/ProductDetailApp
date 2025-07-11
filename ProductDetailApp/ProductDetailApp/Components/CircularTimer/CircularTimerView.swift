@@ -18,7 +18,7 @@ final class CircularTimerView: UIView {
     private let label = UILabel()
     
     private var timer: CountdownTimer
-    private var config: CountdownConfig
+    private var config: CircularTimerConfiguration
     private var progress: Double = 0.0 {
         didSet {
             updateProgressLayer()
@@ -27,8 +27,8 @@ final class CircularTimerView: UIView {
     
     weak var delegate: CircularTimerViewDelegate?
     
-    init(config: CountdownConfig? = nil,timer: CountdownTimer) {
-        self.config = config ?? CountdownConfig()
+    init(config: CircularTimerConfiguration? = nil,timer: CountdownTimer) {
+        self.config = config ?? CircularTimerConfiguration()
         self.timer = timer
         super.init(frame: .zero)
         setupLayers()

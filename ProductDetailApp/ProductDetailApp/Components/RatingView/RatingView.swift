@@ -1,0 +1,109 @@
+//
+//  RatingView.swift
+//  ProductDetailApp
+//
+//  Created by Emincan Antalyalı on 12.07.2025.
+//
+
+import UIKit
+
+class RatingView: UIView {
+    
+    private let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.textColor = .systemOrange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let starsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let reviewCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .systemOrange
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupView()
+    }
+    
+    private func setupView() {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(ratingLabel)
+        addSubview(starsStackView)
+        addSubview(reviewCountLabel)
+        
+        setupStars()
+        
+        NSLayoutConstraint.activate([
+            ratingLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            ratingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            starsStackView.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 8),
+            starsStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            reviewCountLabel.leadingAnchor.constraint(equalTo: starsStackView.trailingAnchor, constant: 8),
+            reviewCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            reviewCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
+    private func setupStars() {
+        for _ in 0..<5 {
+            let starImageView = UIImageView(image: UIImage(systemName: "star.fill"))
+            starImageView.tintColor = .systemOrange
+            starImageView.contentMode = .scaleAspectFit
+            starsStackView.addArrangedSubview(starImageView)
+            starImageView.widthAnchor.constraint(equalToConstant: 14).isActive = true
+            starImageView.heightAnchor.constraint(equalToConstant: 14).isActive = true
+        }
+    }
+    
+    func configure(rating: Double, reviewCount: Int) {
+        ratingLabel.text = String(format: "%.1f", rating)
+        reviewCountLabel.text = "(\(reviewCount) Reviews)"
+        updateStars(rating: rating)
+    }
+    
+    private func updateStars(rating: Double) {
+        let fullStars = Int(rating)
+        let hasHalfStar = rating - Double(fullStars) >= 0.5
+        
+        for (index, arrangedSubview) in starsStackView.arrangedSubviews.enumerated() {
+            guard let starImageView = arrangedSubview as? UIImageView else { continue }
+            
+            if index < fullStars {
+                // Dolu yıldız
+                starImageView.image = UIImage(systemName: "star.fill")
+                starImageView.tintColor = .systemOrange
+            } else if index == fullStars && hasHalfStar {
+                // Yarım yıldız
+                starImageView.image = UIImage(systemName: "star.leadinghalf.filled")
+                starImageView.tintColor = .systemOrange
+            } else {
+                // Boş yıldız
+                starImageView.image = UIImage(systemName: "star")
+                starImageView.tintColor = .systemGray3
+            }
+        }
+    }
+}

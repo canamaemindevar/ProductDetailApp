@@ -8,7 +8,7 @@
 import UIKit.UIKitCore
 
 
-struct CountdownConfig {
+struct CircularTimerConfiguration {
     let duration: Int
     let ringColor: UIColor
     let textColor: UIColor
