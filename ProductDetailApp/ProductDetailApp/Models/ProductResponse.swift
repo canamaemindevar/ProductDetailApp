@@ -9,13 +9,13 @@ import Foundation
 
 struct ProductResponse: Codable {
     
-    let id: Int
-    let name, desc: String
-    let image: String
-    let price: Price
+    let id: Int?
+    let name, desc: String?
+    let image: String?
+    let price: Price?
 }
 
 struct Price: Codable {
-    let value: Int
-    let currency: String
+    let value: Int?
+    let currency: String?
 }

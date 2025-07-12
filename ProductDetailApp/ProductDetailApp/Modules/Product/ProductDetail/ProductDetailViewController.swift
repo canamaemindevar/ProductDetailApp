@@ -15,14 +15,13 @@ final class ProductDetailViewController: BaseViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .systemGray5
-        imageView.placeholderText = "Ürün Görseli"
+        imageView.placeholderText = "Image here"
         return imageView
     }
     
     private lazy var productTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Abercrombie & Fitch"
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.textColor = .label
         return label
@@ -31,7 +30,6 @@ final class ProductDetailViewController: BaseViewController {
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Sweatshirt"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = .systemGray
         return label
@@ -52,7 +50,6 @@ final class ProductDetailViewController: BaseViewController {
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "180.0 $"
         label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         label.textColor = .label
         return label
@@ -65,16 +62,6 @@ final class ProductDetailViewController: BaseViewController {
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    private lazy var installmentLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "18"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        label.textColor = .white
-        label.textAlignment = .center
-        return label
     }()
     
     // MARK: - Stack Views
@@ -148,13 +135,18 @@ final class ProductDetailViewController: BaseViewController {
         priceStackView.addArrangedSubview(timerView)
         
         mainStackView.addArrangedSubview(mock)
+    
         
+        productImageView.isHidden = true
+        ratingView.isHidden = true
+        favoriteView.isHidden = true
+        timerView.isHidden = true
         
+        priceLabel.isHidden = true
+        subtitleLabel.isHidden = true
         
-        // Setup components
-        favoriteView.configure(count: 129, isFavorited: true)
-        ratingView.configure(rating: 5.0, reviewCount: 26)
-        timerView.startTimer()
+        (viewModel as? ProductDetailViewModel)?.fetchProductDetail()
+        (viewModel as? ProductDetailViewModel)?.fetchSocial()
     }
     
     private func setupConstraints() {
@@ -173,11 +165,53 @@ final class ProductDetailViewController: BaseViewController {
     }
     
 }
+
+private extension ProductDetailViewController {
+    
+    func setViewsWithProduct(detail: ProductResponse) {
+        DispatchQueue.main.async {
+            self.productTitleLabel.text = detail.name
+            self.priceLabel.text = "\(String(detail.price?.value ?? 0)) \(detail.price?.currency ?? "")"
+            self.subtitleLabel.text = detail.desc
+            self.productImageView.setImage(detail.image)
+        }
+        
+        productImageView.isHidden = false
+        priceLabel.isHidden = false
+        subtitleLabel.isHidden = false
+    }
+    
+    func setViewsWithSocial(social: SocialResponse) {
+        DispatchQueue.main.async {
+            self.favoriteView.configure(count: social.likeCount ?? 0, isFavorited: true)
+            self.ratingView.configure(rating: Double(social.commentCounts?.averageRating ?? 0), reviewCount:  social.commentCounts?.totalCommentsCount ?? 0)
+           
+        }
+        
+        ratingView.isHidden = false
+        favoriteView.isHidden = false
+        timerView.isHidden = false
+        self.timerView.startTimer()
+    }
+}
 extension ProductDetailViewController: CircularTimerViewDelegate {
     
     func didCountDownFinishCircularTimerView(_ view: CircularTimerView) {
-        //
-        showErrorAlert("done")
+        
+        (viewModel as? ProductDetailViewModel)?.fetchSocial()
+        
     }
     
 }
+
+extension ProductDetailViewController: ProductDetailViewModelInterface {
+    
+    func didProductFetch(detail: ProductResponse) {
+        setViewsWithProduct(detail: detail)
+    }
+    
+    func didSocialtFetch(social: SocialResponse) {
+        setViewsWithSocial(social: social)
+    }
+}
+

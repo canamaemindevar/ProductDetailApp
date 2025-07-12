@@ -7,11 +7,17 @@
 import Foundation
 
 struct SocialResponse: Decodable {
-    let likeCount: Int
-    let commentCounts: CommentCounts
+    let likeCount: Int?
+    let commentCounts: CommentCounts?
 }
 
 struct CommentCounts: Decodable {
-    let averageRating, anonymousCommentsCount, memberCommentsCount: Int
+    let averageRating, anonymousCommentsCount, memberCommentsCount: Int?
+}
+
+extension CommentCounts {
+    var totalCommentsCount: Int {
+        return (anonymousCommentsCount ?? 0) + (memberCommentsCount ?? 0)
+    }
 }
 

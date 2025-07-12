@@ -13,7 +13,7 @@ final class SocialMockRepository: SocialProviderable {
         self.manager = manager
     }
     
-    func social(request: String, completion: @escaping (Result<SocialResponse, NetworkErrors>) -> Void) {
+    func fetchSocial(completion: @escaping (Result<SocialResponse, NetworkErrors>) -> Void) {
         let result: Result<SocialResponse, NetworkErrors> = manager.load(from: "social", type: SocialResponse.self)
         completion(result)
     }

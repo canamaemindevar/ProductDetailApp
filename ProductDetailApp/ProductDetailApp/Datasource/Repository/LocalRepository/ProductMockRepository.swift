@@ -14,7 +14,7 @@ final class ProductMockRepository: ProductProviderable {
         self.manager = manager
     }
     
-    func product(request: String, completion: @escaping (Result<ProductResponse, NetworkErrors>) -> Void) {
+    func fetchProduct(completion: @escaping (Result<ProductResponse, NetworkErrors>) -> Void) {
         let result: Result<ProductResponse, NetworkErrors> = manager.load(from: "product", type: ProductResponse.self)
         completion(result)
     }

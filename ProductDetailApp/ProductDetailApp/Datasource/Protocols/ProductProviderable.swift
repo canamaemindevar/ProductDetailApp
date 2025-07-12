@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ProductProviderable {
-    func product(request: String, completion: @escaping (Result<ProductResponse, NetworkErrors>) -> Void)
+    func fetchProduct(completion: @escaping (Result<ProductResponse, NetworkErrors>) -> Void)
 }

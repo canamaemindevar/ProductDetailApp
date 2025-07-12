@@ -18,8 +18,9 @@ class ProductCoordinator: Coordinator {
     }
     
     func start() {
-        let productDetailViewModel = ProductDetailViewModel()
+        let productDetailViewModel = ProductDetailViewModel(socialRepository: SocialMockRepository(), productRepository: ProductMockRepository())
         let productDetailVC = ProductDetailViewController(viewModel: productDetailViewModel)
+        productDetailViewModel.localDelegate = productDetailVC
         productDetailVC.coordinator = self
         navigationController.pushViewController(productDetailVC, animated: true)
     }
