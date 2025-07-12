@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SocialProviderable {
-    func social(request: String, completion: @escaping (Result<SocialResponse, Error>) -> Void)
+    func social(request: String, completion: @escaping (Result<SocialResponse, NetworkErrors>) -> Void)
 }
