@@ -32,30 +32,36 @@ final class ProductDetailViewModel: BaseViewModel {
 extension ProductDetailViewModel {
     
     func fetchProductDetail() {
-        productRepository.fetchProduct { [weak self] response in
-            switch response {
-            case .success(let success):
-                DispatchQueue.main.async {
+        setLoading(true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.productRepository.fetchProduct { [weak self] response in
+                switch response {
+                case .success(let success):
                     self?.productDetail = success
+                    self?.localDelegate?.didProductFetch(detail: success)
+                case .failure(let failure):
+                    self?.setError(failure.errorString ?? "")
                 }
-                self?.localDelegate?.didProductFetch(detail: success)
-            case .failure(let failure):
-                self?.setError(failure.errorString ?? "")
+                self?.setLoading(false)
             }
         }
     }
     
     func fetchSocial() {
-        socialRepository.fetchSocial { [weak self] response in
-            switch response {
-            case .success(let success):
-                DispatchQueue.main.async {
+        setLoading(true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.socialRepository.fetchSocial { [weak self] response in
+                switch response {
+                case .success(let success):
                     self?.socialDetail = success
+                    self?.localDelegate?.didSocialtFetch(social: success)
+                case .failure(let failure):
+                    self?.setError(failure.errorString ?? "")
                 }
-                self?.localDelegate?.didSocialtFetch(social: success)
-            case .failure(let failure):
-                self?.setError(failure.errorString ?? "")
+                self?.setLoading(false)
             }
         }
+   
     }
 }

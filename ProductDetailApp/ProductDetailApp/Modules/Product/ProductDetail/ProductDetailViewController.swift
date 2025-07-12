@@ -136,7 +136,6 @@ final class ProductDetailViewController: BaseViewController {
         
         mainStackView.addArrangedSubview(mock)
     
-        
         productImageView.isHidden = true
         ratingView.isHidden = true
         favoriteView.isHidden = true
@@ -175,7 +174,6 @@ private extension ProductDetailViewController {
             self.subtitleLabel.text = detail.desc
             self.productImageView.setImage(detail.image)
         }
-        
         productImageView.isHidden = false
         priceLabel.isHidden = false
         subtitleLabel.isHidden = false
@@ -191,7 +189,7 @@ private extension ProductDetailViewController {
         ratingView.isHidden = false
         favoriteView.isHidden = false
         timerView.isHidden = false
-        self.timerView.startTimer()
+        timerView.resetTimer()
     }
 }
 extension ProductDetailViewController: CircularTimerViewDelegate {

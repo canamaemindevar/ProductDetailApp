@@ -57,4 +57,10 @@ extension CountdownTimer {
         timer?.invalidate()
         timer = nil
     }
+    
+    func reset() {
+        stop()
+        self.remaining = duration
+        self.delegate?.countdownDidUpdate(remaining: remaining, progress: 0)
+    }
 }

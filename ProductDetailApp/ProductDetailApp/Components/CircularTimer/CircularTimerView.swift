@@ -105,6 +105,11 @@ extension CircularTimerView {
         timer.stop()
     }
     
+    func resetTimer() {
+        timer.reset()
+        startTimer()
+    }
+    
 }
 
 extension CircularTimerView: CountdownTimerDelegate {
