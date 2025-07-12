@@ -50,6 +50,9 @@ final class CircularTimerView: UIView {
         label.frame = bounds
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 50, height: 50)
+    }
 }
 
 

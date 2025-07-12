@@ -46,7 +46,7 @@ class FavoriteView: UIView {
             heartButton.topAnchor.constraint(equalTo: topAnchor),
             heartButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             heartButton.widthAnchor.constraint(equalToConstant: 24),
-            heartButton.heightAnchor.constraint(equalToConstant: 24),
+            heartButton.heightAnchor.constraint(equalToConstant: 30),
             
             countLabel.topAnchor.constraint(equalTo: heartButton.bottomAnchor, constant: 4),
             countLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
