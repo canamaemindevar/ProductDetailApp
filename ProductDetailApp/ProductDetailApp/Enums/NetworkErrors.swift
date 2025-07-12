@@ -20,6 +20,7 @@ enum NetworkErrors: Error, Equatable {
     case serverError(code: Int)
     case unexpectedStatusCode(code: Int)
   
+    case fileNotFound
     case localJsonParseError
     case localJsonEmptyError
     
@@ -47,6 +48,8 @@ enum NetworkErrors: Error, Equatable {
             return "clientError" + "HTTP Code: \(code)"
         case .unexpectedStatusCode(code: let code):
             return "unexpectedStatusCode" + "HTTP Code: \(code)"
+        case .fileNotFound:
+            return "FileNotFound"
         case .localJsonParseError:
             return "LocalDBParseError"
         case .localJsonEmptyError:
@@ -78,6 +81,8 @@ enum NetworkErrors: Error, Equatable {
             return "İsteğiniz işlenemedi. Lütfen tekrar deneyin."
         case .unexpectedStatusCode:
             return "Sunucudan beklenmeyen bir yanıt alındı."
+        case .fileNotFound:
+            return "Dosya bulunamadı."
         case .localJsonParseError:
             return "Kayıtlı veriler okunurken hata oluştu."
         case .localJsonEmptyError:
