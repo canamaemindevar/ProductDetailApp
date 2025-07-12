@@ -12,6 +12,7 @@ protocol BaseViewModelDelegate: AnyObject {
     func viewModelDidStartLoading()
     func viewModelDidFinishLoading()
     func viewModelDidReceiveError(_ message: String)
+    func viewModelDidReceiveError(_ message: NetworkErrors)
 }
 
 protocol BaseViewModelProtocol: AnyObject {

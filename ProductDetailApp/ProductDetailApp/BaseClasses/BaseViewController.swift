@@ -50,4 +50,8 @@ extension BaseViewController: BaseViewModelDelegate {
         showErrorAlert(message)
     }
     
+    func viewModelDidReceiveError(_ message: NetworkErrors) {
+        showErrorAlert(message.errorString)
+    }
+    
 }
