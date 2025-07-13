@@ -5,6 +5,8 @@
 //  Created by Emincan Antalyalı on 12.07.2025.
 //
 
+import Foundation
+
 final class SocialMockRepository: SocialProviderable {
     
     private let manager: LocalNetworkManager
