@@ -13,7 +13,7 @@ enum AppServices {
     var rawValue: String {
         switch self {
         case .baseUrl:
-            return "https://dummyjson.com/" // baseUrl
+            return API.baseURL
         }
     }
 }
