@@ -13,12 +13,17 @@ class ProductCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var parentCoordinator: Coordinator?
     
+    let provider = ProviderFactory()
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
-        let productDetailViewModel = ProductDetailViewModel(socialRepository: SocialMockRepository(), productRepository: ProductMockRepository())
+        let productDetailViewModel = ProductDetailViewModel(
+            socialRepository: provider.fetchSocialProviderable(),
+            productRepository: provider.fetchProductProviderable()
+        )
         let productDetailVC = ProductDetailViewController(viewModel: productDetailViewModel)
         productDetailViewModel.localDelegate = productDetailVC
         productDetailVC.coordinator = self
