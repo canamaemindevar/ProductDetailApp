@@ -22,11 +22,10 @@ enum ConfigurationManager {
     }
 }
 
-private enum BuildConfiguration {
+ enum BuildConfiguration {
     enum Error: Swift.Error {
         case missingKey, invalidValue
     }
-    
     
     static func value<T>(for key: String) throws ->  T where T: LosslessStringConvertible {
         guard let object = Bundle.main.object(forInfoDictionaryKey: key) else {
@@ -39,17 +38,6 @@ private enum BuildConfiguration {
             return value
         default:
             throw Error.invalidValue
-        }
-    }
-    
-}
-
-enum API {
-    static var baseURL: String {
-        do {
-            return try BuildConfiguration.value(for: "BASE_URL")
-        } catch {
-            fatalError(error.localizedDescription)
         }
     }
 }
