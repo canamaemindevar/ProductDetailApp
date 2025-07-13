@@ -108,9 +108,14 @@ final class ProductDetailViewController: BaseViewController {
         setupUI()
         setupConstraints()
     }
+
+}
+
+// MARK: - Setup Methods
+private extension ProductDetailViewController {
     
-    // MARK: - Setup Methods
-    private func setupUI() {
+ 
+    func setupUI() {
         view.backgroundColor = .systemBackground
         
         view.addSubview(mainStackView)
@@ -148,21 +153,14 @@ final class ProductDetailViewController: BaseViewController {
         (viewModel as? ProductDetailViewModel)?.fetchSocial()
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         NSLayoutConstraint.activate([
-            // MainStack View
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-    
-    // MARK: - Public Methods
-    func configureWith(imageURL: String?) {
-        productImageView.setImage(imageURL)
-    }
-    
 }
 
 private extension ProductDetailViewController {
@@ -192,6 +190,7 @@ private extension ProductDetailViewController {
         timerView.resetTimer()
     }
 }
+
 extension ProductDetailViewController: CircularTimerViewDelegate {
     
     func didCountDownFinishCircularTimerView(_ view: CircularTimerView) {
