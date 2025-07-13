@@ -1,4 +1,5 @@
 # ProductDetailApp
+
 - ⚙️ Added support for multiple environments (Dev and Prod) with separate configuration files and display names.
 - 🧱 Implemented a base MVVM architecture with centralized loading, error, and success handling (with tests).
 - 🧭 Integrated the Coordinator pattern for structured navigation flow across modules.
@@ -10,3 +11,4 @@
 - 🛠️ Implemented `BuildConfiguration` for safe, typed access to Info.plist environment values.
 - 🧠 Applied Repository and Provider patterns for clean separation of concerns in data access (e.g. `ProductRepository`, `SocialProviderable`).
 - 🖼️ Developed `BaseImageView` and `ProductDetailImageView` with dynamic aspect ratio handling, styling, and environment-aware placeholders.
+- 📸 Added Snapshot testing for UI components to ensure consistent visual output.
