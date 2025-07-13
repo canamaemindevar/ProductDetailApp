@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A93C179F2E246C0E0009AA5A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A93C179E2E246C0E0009AA5A /* Kingfisher */; };
+		A94B54222E24770900207EA3 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = A94B54212E24770900207EA3 /* InlineSnapshotTesting */; };
+		A94B54242E24770900207EA3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = A94B54232E24770900207EA3 /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A94B54222E24770900207EA3 /* InlineSnapshotTesting in Frameworks */,
+				A94B54242E24770900207EA3 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +136,8 @@
 			);
 			name = ProductDetailAppTests;
 			packageProductDependencies = (
+				A94B54212E24770900207EA3 /* InlineSnapshotTesting */,
+				A94B54232E24770900207EA3 /* SnapshotTesting */,
 			);
 			productName = ProductDetailAppTests;
 			productReference = A9A77D132E20195300083AE2 /* ProductDetailAppTests.xctest */;
@@ -167,6 +173,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A93C179D2E246C0E0009AA5A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A94B54202E24770900207EA3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A9A77C792E1FC9E300083AE2 /* Products */;
@@ -927,6 +934,14 @@
 				version = 8.4.0;
 			};
 		};
+		A94B54202E24770900207EA3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.18.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -934,6 +949,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A93C179D2E246C0E0009AA5A /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		A94B54212E24770900207EA3 /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A94B54202E24770900207EA3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		A94B54232E24770900207EA3 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A94B54202E24770900207EA3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

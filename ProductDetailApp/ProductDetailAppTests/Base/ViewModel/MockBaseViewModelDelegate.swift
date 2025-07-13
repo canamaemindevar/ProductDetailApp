@@ -8,6 +8,10 @@ import XCTest
 @testable import ProductDetailApp
 
 class MockBaseViewModelDelegate: BaseViewModelDelegate {
+    func viewModelDidReceiveError(_ message: ProductDetailApp.NetworkErrors) {
+        
+    }
+    
     
     var didStartLoadingCalled = false
     var didFinishLoadingCalled = false
