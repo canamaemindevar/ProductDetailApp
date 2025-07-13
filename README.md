@@ -5,3 +5,7 @@
 - 📦 Implemented local JSON data handling with protocol-oriented architecture using Repository pattern.
 - 🌐 Added a generic `NetworkErrors` enum with unified error management for both local and network requests.
 - 🖼️ Introduced reusable UI components like `BaseImageView` and a circular countdown `CircularTimerView`.
+- 🧩 Designed a scalable networking layer using `AppRequest` and `EndpointProtocol` with configurable environment-based endpoints (`AppServices`, `API`).
+- 🧪 Injected mock vs real repositories dynamically via `ProviderFactory` based on environment, supporting both local and prod configurations.
+- 🛠️ Implemented `BuildConfiguration` for safe, typed access to Info.plist environment values.
+- 🧠 Applied Repository and Provider patterns for clean separation of concerns in data access (e.g. `ProductRepository`, `SocialProviderable`).
