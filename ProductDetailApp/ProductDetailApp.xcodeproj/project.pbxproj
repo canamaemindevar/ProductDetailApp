@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A93C179F2E246C0E0009AA5A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A93C179E2E246C0E0009AA5A /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A9A77D172E20195300083AE2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A93C179F2E246C0E0009AA5A /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +108,7 @@
 			);
 			name = ProductDetailApp;
 			packageProductDependencies = (
+				A93C179E2E246C0E0009AA5A /* Kingfisher */,
 			);
 			productName = ProductDetailApp;
 			productReference = A9A77C782E1FC9E300083AE2 /* ProductDetailApp.app */;
@@ -159,6 +165,9 @@
 			);
 			mainGroup = A9A77C6F2E1FC9E300083AE2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A93C179D2E246C0E0009AA5A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A9A77C792E1FC9E300083AE2 /* Products */;
 			projectDirPath = "";
@@ -908,6 +917,25 @@
 			defaultConfigurationName = "Release-Dev";
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A93C179D2E246C0E0009AA5A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = exactVersion;
+				version = 8.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A93C179E2E246C0E0009AA5A /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A93C179D2E246C0E0009AA5A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A9A77C702E1FC9E300083AE2 /* Project object */;
 }

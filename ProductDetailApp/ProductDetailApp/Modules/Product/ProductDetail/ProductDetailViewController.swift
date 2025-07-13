@@ -10,14 +10,13 @@ import UIKit
 final class ProductDetailViewController: BaseViewController {
     
     // MARK: - UI Components
-    private var productImageView: ProductDetailImageView {
-        let imageView = ProductDetailImageView(frame: .zero)
+    private lazy var productImageView: ProductDetailImageView = {
+        let imageView = ProductDetailImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .systemGray5
         imageView.placeholderText = "Image here"
         return imageView
-    }
+    }()
     
     private lazy var productTitleLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +54,7 @@ final class ProductDetailViewController: BaseViewController {
         return label
     }()
     
-    let timerManager = CountdownTimer(duration: 10)
+    private let timerManager = CountdownTimer(duration: 10)
     
     private lazy var timerView: CircularTimerView = {
         let view = CircularTimerView(timer: timerManager)
@@ -162,7 +161,7 @@ private extension ProductDetailViewController {
         ])
     }
 }
-
+// MARK: - Private Methods
 private extension ProductDetailViewController {
     
     func setViewsWithProduct(detail: ProductResponse) {
@@ -191,6 +190,7 @@ private extension ProductDetailViewController {
     }
 }
 
+// MARK: - CircularTimerViewDelegate
 extension ProductDetailViewController: CircularTimerViewDelegate {
     
     func didCountDownFinishCircularTimerView(_ view: CircularTimerView) {
@@ -201,6 +201,7 @@ extension ProductDetailViewController: CircularTimerViewDelegate {
     
 }
 
+// MARK: - ProductDetailViewModelInterface
 extension ProductDetailViewController: ProductDetailViewModelInterface {
     
     func didProductFetch(detail: ProductResponse) {

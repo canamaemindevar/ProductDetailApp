@@ -6,18 +6,15 @@
 //
 
 import UIKit
-//import SDWebImage
+import Kingfisher
+
 extension UIImageView {
-    func setImage(_ url:String?) {
-           
-           guard let urlStr = url else {
-//               self.image = UIImage(named: "appHotNews")
-               return
-           }
-           let wrappedUrl = URL(string: urlStr)
-//           self.sd_setImage(with: wrappedUrl)
-        self.image = nil
-       }
+    func setImage(_ url: String?) {
+        guard let urlStr = url, let wrappedUrl = URL(string: urlStr) else {
+            return
+        }
+        self.kf.setImage(with: wrappedUrl)
+    }
 }
 
 

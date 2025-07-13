@@ -8,31 +8,29 @@ import UIKit
 
 class ProductDetailImageView: BaseImageView {
     
-    // MARK: - Initialization
+    init(aspectRatio: ImageAspectRatio = .standard) {
+        super.init(frame: .zero)
+        self.aspectRatio = aspectRatio
+        setupProductDetailView()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.aspectRatio = .standard
         setupProductDetailView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.aspectRatio = .standard
         setupProductDetailView()
     }
     
-    override var intrinsicContentSize: CGSize {
-          return CGSize(width: UIView.noIntrinsicMetric, height: 150)
-      }
-    
-    // MARK: - Setup
     private func setupProductDetailView() {
-      
         cornerRadius = 12
         borderWidth = 1
         borderColor = UIColor.systemGray5
-//        placeholderImage = UIImage(systemName: "photo")
-        placeholderText = "Ürün Görseli"
-        
-       
+        placeholderText = "Prodcut Image"
         backgroundColor = UIColor.systemGray6
     }
 }

@@ -8,7 +8,7 @@ import UIKit
 
 class BaseImageView: UIImageView {
     
-    // MARK: - Properties
+    // MARK: - Placeholder Properties
     var placeholderImage: UIImage? {
         didSet {
             if image == nil {
@@ -26,6 +26,7 @@ class BaseImageView: UIImageView {
     
     private var placeholderLabel: UILabel?
     
+    // MARK: - Style Properties
     var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -45,15 +46,26 @@ class BaseImageView: UIImageView {
         }
     }
     
+    // MARK: - Aspect Ratio Support
+    var aspectRatio: ImageAspectRatio = .standard {
+        didSet {
+            updateAspectRatioConstraint()
+        }
+    }
+    
+    private var aspectRatioConstraint: NSLayoutConstraint?
+    
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        updateAspectRatioConstraint()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
+        updateAspectRatioConstraint()
     }
     
     // MARK: - Setup
@@ -63,6 +75,7 @@ class BaseImageView: UIImageView {
         backgroundColor = UIColor.systemGray6
         image = placeholderImage
         setupPlaceholderLabel()
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupPlaceholderLabel() {
@@ -87,6 +100,16 @@ class BaseImageView: UIImageView {
     private func updatePlaceholderText() {
         placeholderLabel?.text = placeholderText
     }
+    
+    private func updateAspectRatioConstraint() {
+        if let existing = aspectRatioConstraint {
+            removeConstraint(existing)
+        }
+        let constraint = heightAnchor.constraint(equalTo: widthAnchor, multiplier: aspectRatio.multiplier)
+        constraint.isActive = true
+        aspectRatioConstraint = constraint
+    }
+
     // MARK: - Public Methods
     func setPlaceholder() {
         image = placeholderImage
