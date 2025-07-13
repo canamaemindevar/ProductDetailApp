@@ -31,7 +31,7 @@ class AppRequest: EndpointProtocol {
 
     func request() -> URLRequest? {
         guard let url = url else {
-            print("Error: Invalid URL - \(urlString)")
+            Logger.shared.error("Error: Invalid URL - \(urlString)")
             return nil
         }
 
@@ -45,7 +45,7 @@ class AppRequest: EndpointProtocol {
             do {
                 urlRequest.httpBody = try JSONSerialization.data(withJSONObject: bodyParameters, options: [])
             } catch {
-                print("Error: Failed to serialize body parameters - \(error.localizedDescription)")
+                Logger.shared.error("Error: Failed to serialize body parameters - \(error.localizedDescription)")
             }
         }
        

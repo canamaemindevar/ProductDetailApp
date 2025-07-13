@@ -18,18 +18,18 @@ class NetworkManager: NetworkManagerInterface {
             return
         }
         
-        print(endpoint.debugDescription)
+        Logger.shared.debug(endpoint.debugDescription)
         
         let task = URLSession.shared.dataTask(with: req) { data, response, error in
             
             if let error = error {
-                print("Hata oluştu: \(error.localizedDescription)")
+                Logger.shared.error("Hata oluştu: \(error.localizedDescription)")
                 completion(.failure(.generalError))
                 return
             }
             
             if let httpResponse = response as? HTTPURLResponse {
-                print("HTTP Durum Kodu: \(httpResponse.statusCode)")
+                Logger.shared.debug("HTTP Durum Kodu: \(httpResponse.statusCode)")
                 
                 switch httpResponse.statusCode {
                 case 200...299:
@@ -55,7 +55,7 @@ class NetworkManager: NetworkManagerInterface {
             }
             
             if let responseString = String(data: data, encoding: .utf8) {
-                print("Yanıt: \(responseString)")
+                Logger.shared.debug("Yanıt: \(responseString)")
             }
             
             self.handleResponse(data: data) { response in
@@ -75,7 +75,7 @@ extension NetworkManager {
             let succesData =  try JSONDecoder().decode(T.self, from: data)
             compeltion(.success(succesData))
         } catch  {
-            print(error)
+            Logger.shared.error(error.localizedDescription)
             compeltion(.failure(.parsingError))
         }
         
