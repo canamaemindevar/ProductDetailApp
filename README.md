@@ -9,3 +9,4 @@
 - 🧪 Injected mock vs real repositories dynamically via `ProviderFactory` based on environment, supporting both local and prod configurations.
 - 🛠️ Implemented `BuildConfiguration` for safe, typed access to Info.plist environment values.
 - 🧠 Applied Repository and Provider patterns for clean separation of concerns in data access (e.g. `ProductRepository`, `SocialProviderable`).
+- 🖼️ Developed `BaseImageView` and `ProductDetailImageView` with dynamic aspect ratio handling, styling, and environment-aware placeholders.
