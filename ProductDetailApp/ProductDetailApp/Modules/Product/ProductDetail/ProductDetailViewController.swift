@@ -152,8 +152,8 @@ private extension ProductDetailViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: K.P.p4.rawValue),
+            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: K.P.p4.rawValue.negativeValue),
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }

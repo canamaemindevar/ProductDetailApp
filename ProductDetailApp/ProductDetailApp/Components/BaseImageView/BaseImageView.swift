@@ -90,9 +90,9 @@ class BaseImageView: UIImageView {
             label.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 label.centerXAnchor.constraint(equalTo: centerXAnchor),
-                label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-                label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-                label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+                label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: K.P.p2.negativeValue),
+                label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: K.P.p2.rawValue),
+                label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: K.P.p2.negativeValue)
             ])
         }
     }

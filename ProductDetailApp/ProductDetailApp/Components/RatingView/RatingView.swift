@@ -54,14 +54,14 @@ class RatingView: UIView {
             ratingLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             ratingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            starsStackView.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 8),
+            starsStackView.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: K.P.p2.rawValue),
             starsStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            reviewCountLabel.leadingAnchor.constraint(equalTo: starsStackView.trailingAnchor, constant: 8),
+            reviewCountLabel.leadingAnchor.constraint(equalTo: starsStackView.trailingAnchor, constant: K.P.p2.rawValue),
             reviewCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             reviewCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            heightAnchor.constraint(equalToConstant: 20)
+            heightAnchor.constraint(equalToConstant: K.P.p4.rawValue)
         ])
     }
     
