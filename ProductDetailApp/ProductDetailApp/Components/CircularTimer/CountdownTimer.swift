@@ -14,9 +14,9 @@ protocol CountdownTimerDelegate: AnyObject {
 final class CountdownTimer {
     weak var delegate: CountdownTimerDelegate?
     
-    private var timer: Timer?
-    private let duration: Int
-    private var remaining: Int
+    var timer: Timer?
+    let duration: Int
+    var remaining: Int
     
     init(duration: Int) {
         self.duration = duration
