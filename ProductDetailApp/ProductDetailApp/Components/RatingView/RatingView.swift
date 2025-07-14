@@ -9,12 +9,11 @@ import UIKit
 
 class RatingView: UIView {
     
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        label.textColor = .systemOrange
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var ratingLabel: UILabel = {
+        UILabelBuilder()
+            .setFont(.systemFont(ofSize: 14, weight: .medium))
+            .setTextColor(.systemOrange)
+            .build()
     }()
     
     private let starsStackView: UIStackView = {
@@ -25,12 +24,11 @@ class RatingView: UIView {
         return stackView
     }()
     
-    private let reviewCountLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemOrange
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var reviewCountLabel: UILabel = {
+        UILabelBuilder()
+            .setFont(.systemFont(ofSize: 14, weight: .regular))
+            .setTextColor(.systemOrange)
+            .build()
     }()
     
     override init(frame: CGRect) {

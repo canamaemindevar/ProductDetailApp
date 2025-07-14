@@ -19,20 +19,19 @@ final class ProductDetailViewController: BaseViewController {
     }()
     
     private lazy var productTitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        label.textColor = .label
-        return label
+        UILabelBuilder()
+            .setFont(.systemFont(ofSize: 20, weight: .medium))
+            .setTextColor(.label)
+            .build()
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .systemGray
-        return label
+        UILabelBuilder()
+            .setFont(.systemFont(ofSize: 16, weight: .regular))
+            .setTextColor(.systemGray)
+            .build()
     }()
+    
     
     private lazy var favoriteView: FavoriteView = {
         let view = FavoriteView()
@@ -47,11 +46,10 @@ final class ProductDetailViewController: BaseViewController {
     }()
     
     private lazy var priceLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        label.textColor = .label
-        return label
+        UILabelBuilder()
+            .setFont(.systemFont(ofSize: 28, weight: .bold))
+            .setTextColor(.label)
+            .build()
     }()
     
     private let timerManager = CountdownTimer(duration: 10)

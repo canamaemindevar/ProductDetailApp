@@ -17,13 +17,12 @@ class FavoriteView: UIView {
         return button
     }()
     
-    private let countLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemGray
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var countLabel: UILabel = {
+        UILabelBuilder()
+            .setFont(.systemFont(ofSize: 14, weight: .regular))
+            .setTextColor(.systemGray)
+            .setTextAlignment(.center)
+            .build()
     }()
     
     override init(frame: CGRect) {
