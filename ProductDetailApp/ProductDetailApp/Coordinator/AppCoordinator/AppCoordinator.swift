@@ -17,10 +17,10 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        showProductDetail()
+        routeToProductCoordinator()
     }
     
-    private func showProductDetail() {
+    private func routeToProductCoordinator() {
         let productCoordinator = ProductCoordinator(navigationController: navigationController)
         addChild(productCoordinator)
         productCoordinator.start()

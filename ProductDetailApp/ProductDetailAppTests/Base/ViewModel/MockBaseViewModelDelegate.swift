@@ -8,11 +8,7 @@ import XCTest
 @testable import ProductDetailApp
 
 class MockBaseViewModelDelegate: BaseViewModelDelegate {
-    func viewModelDidReceiveError(_ message: ProductDetailApp.NetworkErrors) {
-        
-    }
-    
-    
+
     var didStartLoadingCalled = false
     var didFinishLoadingCalled = false
     var didReceiveErrorCalled = false
@@ -30,6 +26,12 @@ class MockBaseViewModelDelegate: BaseViewModelDelegate {
     func viewModelDidReceiveError(_ message: String) {
         didReceiveErrorCalled = true
         receivedErrorMessage = message
+        errorCallCount += 1
+    }
+    
+    func viewModelDidReceiveError(_ message: ProductDetailApp.NetworkErrors) {
+        didReceiveErrorCalled = true
+        receivedErrorMessage = message.errorString
         errorCallCount += 1
     }
     

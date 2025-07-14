@@ -46,7 +46,7 @@ class BaseViewModel: BaseViewModelProtocol {
         isLoading = loading
     }
     
-    func setError(_ message: String) {
+    func setError(_ message: String?) {
         errorMessage = message
     }
     

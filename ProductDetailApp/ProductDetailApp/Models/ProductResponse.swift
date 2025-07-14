@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProductResponse: Codable {
+struct ProductResponse: Decodable {
     
     let id: Int?
     let name, desc: String?
@@ -15,7 +15,7 @@ struct ProductResponse: Codable {
     let price: Price?
 }
 
-struct Price: Codable {
+struct Price: Decodable {
     let value: Int?
     let currency: String?
 }

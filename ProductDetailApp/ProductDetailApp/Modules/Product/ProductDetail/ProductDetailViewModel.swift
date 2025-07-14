@@ -19,9 +19,6 @@ final class ProductDetailViewModel: BaseViewModel {
     private var socialRepository: SocialProviderable
     private var productRepository: ProductProviderable
     
-    var productDetail: ProductResponse?
-    var socialDetail: SocialResponse?
-    
     init(socialRepository: SocialProviderable, productRepository: ProductProviderable) {
         self.socialRepository = socialRepository
         self.productRepository = productRepository
@@ -37,10 +34,9 @@ extension ProductDetailViewModel {
             self.productRepository.fetchProduct { [weak self] response in
                 switch response {
                 case .success(let success):
-                    self?.productDetail = success
                     self?.localDelegate?.didProductFetch(detail: success)
                 case .failure(let failure):
-                    self?.setError(failure.errorString ?? "")
+                    self?.setError(failure.errorString)
                 }
                 self?.setLoading(false)
             }
@@ -54,10 +50,9 @@ extension ProductDetailViewModel {
             self.socialRepository.fetchSocial { [weak self] response in
                 switch response {
                 case .success(let success):
-                    self?.socialDetail = success
                     self?.localDelegate?.didSocialtFetch(social: success)
                 case .failure(let failure):
-                    self?.setError(failure.errorString ?? "")
+                    self?.setError(failure.errorString)
                 }
                 self?.setLoading(false)
             }

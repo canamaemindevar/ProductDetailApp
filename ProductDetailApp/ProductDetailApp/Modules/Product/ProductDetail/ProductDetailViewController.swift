@@ -52,7 +52,7 @@ final class ProductDetailViewController: BaseViewController {
             .build()
     }()
     
-    private let timerManager = CountdownTimer(duration: 10)
+    private let timerManager = CountdownTimer(duration: 60)
     
     private lazy var timerView: CircularTimerView = {
         let view = CircularTimerView(timer: timerManager)
@@ -110,7 +110,6 @@ final class ProductDetailViewController: BaseViewController {
 
 // MARK: - Setup Methods
 private extension ProductDetailViewController {
-    
  
     func setupUI() {
         view.backgroundColor = .systemBackground
@@ -192,11 +191,8 @@ private extension ProductDetailViewController {
 extension ProductDetailViewController: CircularTimerViewDelegate {
     
     func didCountDownFinishCircularTimerView(_ view: CircularTimerView) {
-        
         (viewModel as? ProductDetailViewModel)?.fetchSocial()
-        
     }
-    
 }
 
 // MARK: - ProductDetailViewModelInterface

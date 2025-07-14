@@ -9,9 +9,14 @@ import UIKit
 
 class FavoriteView: UIView {
     
+    private enum Constants {
+        static var heartFillImage =  UIImage(systemName: "heart.fill")
+        static var heartImage =  UIImage(systemName: "heart")
+    }
+    
     private let heartButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        button.setImage(Constants.heartFillImage, for: .normal)
         button.tintColor = .systemRed
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -55,9 +60,8 @@ class FavoriteView: UIView {
     }
     
     func configure(count: Int, isFavorited: Bool) {
-        countLabel.text = "\(count)"
-        let heartImageName = isFavorited ? "heart.fill" : "heart"
-        heartButton.setImage(UIImage(systemName: heartImageName), for: .normal)
+        countLabel.text = count.safeString
+        heartButton.setImage(isFavorited ? Constants.heartFillImage : Constants.heartImage, for: .normal)
         heartButton.tintColor = isFavorited ? .systemRed : .systemGray
     }
 }
