@@ -17,10 +17,6 @@ enum K {
         case p5 = 24
         case p6 = 32
     }
-    
-    enum Texts {
-       
-    }
 }
 
 extension K.P {

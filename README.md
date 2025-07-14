@@ -12,3 +12,4 @@
 - 🧠 Applied Repository and Provider patterns for clean separation of concerns in data access (e.g. `ProductRepository`, `SocialProviderable`).
 - 🖼️ Developed `BaseImageView` and `ProductDetailImageView` with dynamic aspect ratio handling, styling, and environment-aware placeholders.
 - 📸 Added Snapshot testing for UI components to ensure consistent visual output.
+- 📐 Introduced a centralized spacing system using enum-based constants (`K.P`) for consistent layout values.
