@@ -67,7 +67,7 @@ final class ProductDetailViewController: BaseViewController {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = K.P.p4.rawValue
         stackView.alignment = .fill
         return stackView
     }()
@@ -85,7 +85,7 @@ final class ProductDetailViewController: BaseViewController {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.spacing = 4
+        stackView.spacing = K.P.p1.rawValue
         stackView.alignment = .leading
         return stackView
     }()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RatingView: UIView {
+final class RatingView: UIView {
     
     private lazy var ratingLabel: UILabel = {
         UILabelBuilder()
@@ -16,10 +16,10 @@ class RatingView: UIView {
             .build()
     }()
     
-    private let starsStackView: UIStackView = {
+    private lazy var starsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 2
+        stackView.spacing = K.P.p1.rawValue
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -29,6 +29,16 @@ class RatingView: UIView {
             .setFont(.systemFont(ofSize: 14, weight: .regular))
             .setTextColor(.systemOrange)
             .build()
+    }()
+    
+    private let horizontalStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = K.P.p2.rawValue
+        stack.alignment = .center
+        stack.distribution = .fill // işte burası kritik!
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     override init(frame: CGRect) {
@@ -43,24 +53,19 @@ class RatingView: UIView {
     
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubview(ratingLabel)
-        addSubview(starsStackView)
-        addSubview(reviewCountLabel)
+        addSubview(horizontalStack)
         
         setupStars()
         
+        horizontalStack.addArrangedSubview(ratingLabel)
+        horizontalStack.addArrangedSubview(starsStackView)
+        horizontalStack.addArrangedSubview(reviewCountLabel)
+        
         NSLayoutConstraint.activate([
-            ratingLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            ratingLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-            starsStackView.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: K.P.p2.rawValue),
-            starsStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-            reviewCountLabel.leadingAnchor.constraint(equalTo: starsStackView.trailingAnchor, constant: K.P.p2.rawValue),
-            reviewCountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            reviewCountLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
+            horizontalStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            horizontalStack.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            horizontalStack.topAnchor.constraint(equalTo: topAnchor),
+            horizontalStack.bottomAnchor.constraint(equalTo: bottomAnchor),
             heightAnchor.constraint(equalToConstant: K.P.p4.rawValue)
         ])
     }
@@ -71,8 +76,11 @@ class RatingView: UIView {
             starImageView.tintColor = .systemOrange
             starImageView.contentMode = .scaleAspectFit
             starsStackView.addArrangedSubview(starImageView)
-            starImageView.widthAnchor.constraint(equalToConstant: 14).isActive = true
-            starImageView.heightAnchor.constraint(equalToConstant: 14).isActive = true
+            
+            NSLayoutConstraint.activate([
+                starImageView.widthAnchor.constraint(equalToConstant: 14),
+                starImageView.heightAnchor.constraint(equalToConstant: 14)
+            ])
         }
     }
     
@@ -90,15 +98,12 @@ class RatingView: UIView {
             guard let starImageView = arrangedSubview as? UIImageView else { continue }
             
             if index < fullStars {
-                // Dolu yıldız
                 starImageView.image = UIImage(systemName: "star.fill")
                 starImageView.tintColor = .systemOrange
             } else if index == fullStars && hasHalfStar {
-                // Yarım yıldız
                 starImageView.image = UIImage(systemName: "star.leadinghalf.filled")
                 starImageView.tintColor = .systemOrange
             } else {
-                // Boş yıldız
                 starImageView.image = UIImage(systemName: "star")
                 starImageView.tintColor = .systemGray3
             }
