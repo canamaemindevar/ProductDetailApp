@@ -8,52 +8,50 @@
 import UIKit
 
 final class UILabelBuilder {
-    private var font: UIFont = .systemFont(ofSize: 17)
-    private var textColor: UIColor = .label
-    private var alignment: NSTextAlignment = .natural
-    private var numberOfLines: Int = 1
-    private var lineBreakMode: NSLineBreakMode = .byTruncatingTail
-    private var text: String? = nil
+    private let label: UILabel
 
+    init() {
+        self.label = UILabel()
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    @discardableResult
     func setFont(_ font: UIFont) -> Self {
-        self.font = font
+        label.font = font
         return self
     }
 
+    @discardableResult
     func setTextColor(_ color: UIColor) -> Self {
-        self.textColor = color
+        label.textColor = color
         return self
     }
 
+    @discardableResult
     func setTextAlignment(_ alignment: NSTextAlignment) -> Self {
-        self.alignment = alignment
+        label.textAlignment = alignment
         return self
     }
 
+    @discardableResult
     func setNumberOfLines(_ lines: Int) -> Self {
-        self.numberOfLines = lines
+        label.numberOfLines = lines
         return self
     }
 
+    @discardableResult
     func setLineBreakMode(_ mode: NSLineBreakMode) -> Self {
-        self.lineBreakMode = mode
+        label.lineBreakMode = mode
         return self
     }
 
+    @discardableResult
     func setText(_ text: String?) -> Self {
-        self.text = text
+        label.text = text
         return self
     }
 
     func build() -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = font
-        label.textColor = textColor
-        label.textAlignment = alignment
-        label.numberOfLines = numberOfLines
-        label.lineBreakMode = lineBreakMode
-        label.text = text
         return label
     }
 }

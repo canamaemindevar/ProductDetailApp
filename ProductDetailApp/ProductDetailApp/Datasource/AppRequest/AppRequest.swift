@@ -19,9 +19,6 @@ class AppRequest: EndpointProtocol {
     var encodedParameters: Data?
     
     init(method: HTTPMethod, url: String, bodyParameters: [String: Any]? = nil, header: [String: String]? = nil, timeoutInterval: TimeInterval = 90) {
-        
-      
-        
         self.method = method
         self.urlString = url
         self.bodyParameters = bodyParameters

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProviderFactory {
+final class ProviderFactory {
     func fetchProductProviderable() -> ProductProviderable {
         if ConfigurationManager.environment == .prod {
 //            return ProductRepository()

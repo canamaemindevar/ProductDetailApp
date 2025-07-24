@@ -31,3 +31,4 @@ final class ProductDetailViewControllerSnapshotTests: XCTestCase {
         assertSnapshot(of: vc, as: .image)
     }
 }
+

@@ -52,7 +52,7 @@ final class ProductDetailViewController: BaseViewController {
             .build()
     }()
     
-    private let timerManager = CountdownTimer(duration: 60)
+    private let timerManager = CountdownTimer(duration: 10)
     
     private lazy var timerView: CircularTimerView = {
         let view = CircularTimerView(timer: timerManager)
