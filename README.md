@@ -13,3 +13,8 @@
 - 🖼️ Developed `BaseImageView` and `ProductDetailImageView` with dynamic aspect ratio handling, styling, and environment-aware placeholders.
 - 📸 Added Snapshot testing for UI components to ensure consistent visual output.
 - 📐 Introduced a centralized spacing system using enum-based constants (`K.P`) for consistent layout values.
+
+Architecture Migration
+This project demonstrates two different asynchronous programming approaches:
+Current Version (Completion Blocks): You are currently viewing the completion block-based implementation on the main branch.
+Modern Version (Async/Await): For the updated async/await implementation, check out: https://github.com/canamaemindevar/ProductDetailApp/tree/main%2BAsyncAwait
