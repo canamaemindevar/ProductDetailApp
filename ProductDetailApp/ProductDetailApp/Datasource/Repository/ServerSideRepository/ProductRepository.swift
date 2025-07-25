@@ -15,8 +15,8 @@ final class ProductRepository: ProductProviderable {
         self.manager = manager
     }
     
-    func fetchProduct(completion: @escaping (Result<ProductResponse, NetworkErrors>) -> Void) {
+    func fetchProduct() async throws -> ProductResponse {
         let req = AppRequest(method: .get, url: AppServices.Product.detail.url)
-        manager.request(req, completion: completion)
+        return try await manager.request(req) 
     }
 }

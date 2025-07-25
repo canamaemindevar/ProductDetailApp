@@ -14,8 +14,8 @@ final class SocialRepository: SocialProviderable {
         self.manager = manager
     }
     
-    func fetchSocial(completion: @escaping (Result<SocialResponse, NetworkErrors>) -> Void) {
-        let req = AppRequest(method: .get, url: AppServices.Product.social.url)
-        manager.request(req, completion: completion)
-    }
+    func fetchSocial() async throws -> SocialResponse {
+            let req = AppRequest(method: .get, url: AppServices.Product.social.url)
+            return try await manager.request(req) 
+        }
 }

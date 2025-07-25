@@ -144,9 +144,11 @@ private extension ProductDetailViewController {
         
         priceLabel.isHidden = true
         subtitleLabel.isHidden = true
-        
-        (viewModel as? ProductDetailViewModel)?.fetchProductDetail()
-        (viewModel as? ProductDetailViewModel)?.fetchSocial()
+        Task {
+            (viewModel as? ProductDetailViewModel)?.fetchProductDetail()
+            (viewModel as? ProductDetailViewModel)?.fetchSocial()
+        }
+       
     }
     
     func setupConstraints() {
@@ -167,23 +169,23 @@ private extension ProductDetailViewController {
             self.priceLabel.text = "\(String(detail.price?.value ?? 0)) \(detail.price?.currency ?? "")"
             self.subtitleLabel.text = detail.desc
             self.productImageView.setImage(detail.image)
+            
+            self.productImageView.isHidden = false
+            self.priceLabel.isHidden = false
+            self.subtitleLabel.isHidden = false
         }
-        productImageView.isHidden = false
-        priceLabel.isHidden = false
-        subtitleLabel.isHidden = false
     }
     
     func setViewsWithSocial(social: SocialResponse) {
         DispatchQueue.main.async {
             self.favoriteView.configure(count: social.likeCount ?? 0, isFavorited: true)
-            self.ratingView.configure(rating: Double(social.commentCounts?.averageRating ?? 0), reviewCount:  social.commentCounts?.totalCommentsCount ?? 0)
-           
+            self.ratingView.configure(rating: Double(social.commentCounts?.averageRating ?? 0), reviewCount: social.commentCounts?.totalCommentsCount ?? 0)
+
+            self.ratingView.isHidden = false
+            self.favoriteView.isHidden = false
+            self.timerView.isHidden = false
+            self.timerView.resetTimer()
         }
-        
-        ratingView.isHidden = false
-        favoriteView.isHidden = false
-        timerView.isHidden = false
-        timerView.resetTimer()
     }
 }
 
@@ -191,7 +193,9 @@ private extension ProductDetailViewController {
 extension ProductDetailViewController: CircularTimerViewDelegate {
     
     func didCountDownFinishCircularTimerView(_ view: CircularTimerView) {
-        (viewModel as? ProductDetailViewModel)?.fetchSocial()
+        Task {
+            (viewModel as? ProductDetailViewModel)?.fetchSocial()
+        }
     }
 }
 
@@ -206,4 +210,3 @@ extension ProductDetailViewController: ProductDetailViewModelInterface {
         setViewsWithSocial(social: social)
     }
 }
-

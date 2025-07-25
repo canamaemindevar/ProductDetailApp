@@ -43,14 +43,20 @@ class BaseViewModel: BaseViewModelProtocol {
     }
     
     func setLoading(_ loading: Bool) {
-        isLoading = loading
+        DispatchQueue.main.async {
+            self.isLoading = loading
+        }
     }
     
     func setError(_ message: String?) {
-        errorMessage = message
+        DispatchQueue.main.async {
+            self.errorMessage = message
+        }
     }
     
     func clearError() {
-        errorMessage = nil
+        DispatchQueue.main.async {
+            self.errorMessage = nil
+        }
     }
 }

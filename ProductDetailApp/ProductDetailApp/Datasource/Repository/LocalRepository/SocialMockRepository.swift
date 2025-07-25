@@ -15,8 +15,13 @@ final class SocialMockRepository: SocialProviderable {
         self.manager = manager
     }
     
-    func fetchSocial(completion: @escaping (Result<SocialResponse, NetworkErrors>) -> Void) {
+    func fetchSocial() async throws -> SocialResponse {
         let result: Result<SocialResponse, NetworkErrors> = manager.load(from: "social", type: SocialResponse.self)
-        completion(result)
+        switch result {
+         case .success(let response):
+             return response
+         case .failure(let error):
+             throw error
+         }
     }
 }

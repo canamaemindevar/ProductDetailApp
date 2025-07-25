@@ -8,76 +8,48 @@
 import Foundation
 
 class NetworkManager: NetworkManagerInterface {
+    
+    func request<T: Decodable>(_ endpoint: AppRequest) async throws -> T where T: Decodable {
         
-    func request<T: Decodable>(_ endpoint: AppRequest, completion: @escaping (Result<T, NetworkErrors>) -> Void) {
+        guard let req = endpoint.request() else { throw NetworkErrors.invalidRequest }
         
-        guard let req = endpoint.request() else {
-            DispatchQueue.main.async {
-                completion(.failure(.invalidRequest))
-            }
-            return
-        }
-        
-        Logger.shared.debug(endpoint.debugDescription)
-        
-        let task = URLSession.shared.dataTask(with: req) { data, response, error in
+        do {
+            let (data, response) = try await URLSession.shared.data(for: req)
+            guard let httpResponse = (response as? HTTPURLResponse) else { throw NetworkErrors.generalError }
             
-            if let error = error {
-                Logger.shared.error("Hata oluştu: \(error.localizedDescription)")
-                completion(.failure(.generalError))
-                return
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                Logger.shared.debug("HTTP Durum Kodu: \(httpResponse.statusCode)")
-                
-                switch httpResponse.statusCode {
-                case 200...299:
-                    break
-                case 400...499:
-                    completion(.failure(.clientError(code: httpResponse.statusCode)))
-                    return
-                case 500...599:
-                    completion(.failure(.serverError(code: httpResponse.statusCode)))
-                    return
-                default:
-                    completion(.failure(.unexpectedStatusCode(code: httpResponse.statusCode)))
-                    return
-                }
-            } else {
-                completion(.failure(.generalError))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.noData))
-                return
+            switch httpResponse.statusCode {
+            case 200...299:
+                break
+            case 400...499:
+                throw NetworkErrors.clientError(code: httpResponse.statusCode)
+            case 500...599:
+                throw NetworkErrors.serverError(code: httpResponse.statusCode)
+            default:
+                throw NetworkErrors.unexpectedStatusCode(code: httpResponse.statusCode)
             }
             
             if let responseString = String(data: data, encoding: .utf8) {
                 Logger.shared.debug("Yanıt: \(responseString)")
             }
             
-            self.handleResponse(data: data) { response in
-                completion(response)
-            }
+            return try await handleResponse(data: data)
+            
+        } catch  {
+            throw error
         }
         
-        task.resume()
     }
 }
 
 extension NetworkManager {
     
-    fileprivate func handleResponse<T: Decodable>(data: Data, compeltion: @escaping( (Result<T,NetworkErrors>)-> () ) ) {
-        
+    fileprivate func handleResponse<T: Decodable>(data: Data) async throws -> T {
         do {
-            let succesData =  try JSONDecoder().decode(T.self, from: data)
-            compeltion(.success(succesData))
-        } catch  {
+            let successData = try JSONDecoder().decode(T.self, from: data)
+            return successData
+        } catch {
             Logger.shared.error(error.localizedDescription)
-            compeltion(.failure(.parsingError))
+            throw NetworkErrors.parsingError
         }
-        
     }
 }

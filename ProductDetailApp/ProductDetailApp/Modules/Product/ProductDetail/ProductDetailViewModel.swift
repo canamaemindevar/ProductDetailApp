@@ -30,33 +30,33 @@ extension ProductDetailViewModel {
     
     func fetchProductDetail() {
         setLoading(true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.productRepository.fetchProduct { [weak self] response in
-                switch response {
-                case .success(let success):
-                    self?.localDelegate?.didProductFetch(detail: success)
-                case .failure(let failure):
-                    self?.setError(failure.errorString)
-                }
-                self?.setLoading(false)
+        
+        Task {
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            
+            do {
+                let result = try await productRepository.fetchProduct()
+                self.localDelegate?.didProductFetch(detail: result)
+            } catch let error as NetworkErrors {
+                self.setError(error.errorString)
             }
+            self.setLoading(false)
         }
     }
     
     func fetchSocial() {
         setLoading(true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.socialRepository.fetchSocial { [weak self] response in
-                switch response {
-                case .success(let success):
-                    self?.localDelegate?.didSocialtFetch(social: success)
-                case .failure(let failure):
-                    self?.setError(failure.errorString)
-                }
-                self?.setLoading(false)
+        Task {
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            
+            do {
+                let result = try await socialRepository.fetchSocial()
+                self.localDelegate?.didSocialtFetch(social: result)
+            } catch let error as NetworkErrors {
+                self.setError(error.errorString)
             }
+            self.setLoading(false)
         }
-   
     }
 }

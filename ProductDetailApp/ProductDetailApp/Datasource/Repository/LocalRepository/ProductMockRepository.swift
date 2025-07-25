@@ -14,8 +14,13 @@ final class ProductMockRepository: ProductProviderable {
         self.manager = manager
     }
     
-    func fetchProduct(completion: @escaping (Result<ProductResponse, NetworkErrors>) -> Void) {
+    func fetchProduct() async throws -> ProductResponse {
         let result: Result<ProductResponse, NetworkErrors> = manager.load(from: "product", type: ProductResponse.self)
-        completion(result)
+        switch result {
+         case .success(let response):
+             return response
+         case .failure(let error):
+             throw error
+         }
     }
 }

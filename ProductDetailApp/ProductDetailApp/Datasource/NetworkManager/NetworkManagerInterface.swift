@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkManagerInterface {
-    func request<T: Decodable>(_ endpoint: AppRequest, completion: @escaping (Result<T, NetworkErrors>) -> Void)
+    func request<T: Decodable>(_ endpoint: AppRequest) async throws -> T where T: Decodable
 }

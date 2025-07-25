@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SocialProviderable {
-    func fetchSocial(completion: @escaping (Result<SocialResponse, NetworkErrors>) -> Void)
+    func fetchSocial() async throws -> SocialResponse
 }
