@@ -13,3 +13,8 @@
 - 🖼️ Developed `BaseImageView` and `ProductDetailImageView` with dynamic aspect ratio handling, styling, and environment-aware placeholders.
 - 📸 Added Snapshot testing for UI components to ensure consistent visual output.
 - 📐 Introduced a centralized spacing system using enum-based constants (`K.P`) for consistent layout values.
+- 🔄 Migrated from completion blocks to async/await for cleaner, more maintainable asynchronous code throughout the application.
+
+Architecture Migration
+This project has been updated to use modern Swift concurrency with async/await pattern instead of completion blocks. You can find the previous completion block-based implementation at:
+Previous Version (Completion Blocks): https://github.com/canamaemindevar/ProductDetailApp/tree/main
